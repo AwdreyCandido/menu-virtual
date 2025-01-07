@@ -14,13 +14,19 @@ return new class extends Migration
     {
         Schema::create('orders', function (Blueprint $table) {
             $table->id();
-            $table->foreignIdFor(Client::class); // client_id
-            $table->foreignIdFor(Store::class); // store_id
-            $table->foreignIdFor(Order::class); // order_id
-            $table->tinyInteger('status');
-            $table->float('total');
-            $table->json('items');
+            $table->string('method');
             $table->string('delivery_address');
+            $table->tinyInteger('status');
+            $table->double('amount');
+            $table->json('items');
+
+            $table->unsignedBigInteger('client_id');
+            $table->unsignedBigInteger('store_id');
+            $table->unsignedBigInteger('order_id');
+            $table->foreign('client_id')->references('id')->on('clients'); // client_id
+            $table->foreign('store_id')->references('id')->on('stores'); // store_id
+            $table->foreign('order_id')->references('id')->on('orders'); // order_id
+            
             $table->timestamps();
         });
     }

@@ -15,11 +15,16 @@ return new class extends Migration
             $table->id();
             $table->string('name');
             $table->string('description');
+            $table->string('image_url');
             $table->float('value');
             $table->boolean('available');
-            $table->string('image_url');
-            $table->foreignIdFor(Category::class); // category_id
-            $table->foreignIdFor(Store::class); // store_id
+
+
+            $table->unsignedBigInteger('category_id');
+            $table->unsignedBigInteger('store_id');
+            $table->foreign('category_id')->references('id')->on('categories'); // category_id
+            $table->foreign('store_id')->references('id')->on('stores'); // store_id
+
             $table->timestamps();
         });
     }

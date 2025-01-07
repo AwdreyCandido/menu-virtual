@@ -14,14 +14,14 @@ return new class extends Migration
         Schema::create('stores', function (Blueprint $table) {
             $table->id();
             $table->string('name');
-            $table->string('phone');
-            $table->string('email');
+            $table->string('phone')->unique();
+            $table->string('email')->unique();
             $table->string('password');
             $table->text('description');
             $table->tinyInteger('status');
             $table->string('image_url');
             $table->string('payment_methods');
-            $table->string('rating_avg');
+            $table->float('ratings_avg');
             $table->json('days_of_week');
             $table->timestamps();
         });
